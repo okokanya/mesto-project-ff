@@ -1,4 +1,6 @@
 import './card.js';
+import './modal.js';
+
 import { createCard } from './card.js';
 import { initialCards } from './data.js';
 
