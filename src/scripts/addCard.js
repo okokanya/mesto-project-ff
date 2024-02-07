@@ -1,6 +1,5 @@
 import { createCard, removeCard } from './card';
 import { closeModal } from './modal';
-
 const newdata = {name: '', link: ''};
 
 function getNewData () {
