@@ -1,27 +1,26 @@
-import { createCard, removeCard } from './card';
+import { createCard, removeCard, toggleLike } from './card';
 import { closeModal } from './modal';
-const newdata = {name: '', link: ''};
 
-function getNewData () {
-  const newPlace = document.forms.newPlace;
-  const newPlaceName = newPlace.placeName.value;
+function getNewData () { 
+  const newPlace = document.forms.newPlace; 
+  const newPlaceName = newPlace.placeName.value; 
   const newPlaceSrc = newPlace.imageSrc.value;
-  newdata.name = newPlaceName;
-  newdata.link = newPlaceSrc;
-  return newdata;
+  const newData = {
+     name: newPlaceName,
+     link: newPlaceSrc
+   };
+  return newData;
 }
 
-export function addCard(evt) {
-  const activePopUp = document.querySelector('#active');
-  activePopUp.querySelector('.popup__button').addEventListener('click', createNewCard);
-}
-
-function createNewCard(evt) {
-  evt.preventDefault();
-  getNewData();
-  const newCard = createCard(newdata, removeCard);
+function createNewCard(e) {
+  e.preventDefault();
+  const newCard = createCard(getNewData(), removeCard, toggleLike);
   newPlace.reset();
   const placesList = document.querySelector('.places__list');
-  placesList.insertBefore(newCard, document.querySelector('.places__item'));
-  closeModal();
+  placesList.prepend(newCard);
+  closeModal(document.querySelector('.popup_opened'));
+}
+
+export function addCard() {
+  document.forms.newPlace.addEventListener('submit', createNewCard);
 }

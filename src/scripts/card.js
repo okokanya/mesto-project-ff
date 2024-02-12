@@ -28,7 +28,8 @@ export const removeCard = evt => {
 export function toggleLike(){
   this.classList.toggle('card__like-button_is-active');
 };
+
 // @todo: Вывести карточки на страницу
-initialCards.forEach(function (element) {
-  placesList.append(createCard(element, removeCard, toggleLike));
-})
+// initialCards.forEach(function (element) {
+//   placesList.append(createCard(element, removeCard, toggleLike));
+// })

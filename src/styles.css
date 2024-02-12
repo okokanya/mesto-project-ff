@@ -11,14 +11,13 @@
 @import url('./blocks/popup/_is-animated/popup_is-animated.css');
 @import url('./blocks/popup/_is-opened/popup_is-opened.css');
 
-
-
-.fadeInPopupAnitaion {
-  animation: fadein 0.6s;
+.popup_opened {
+  display: flex;
+  animation: fadein 0.4s;
 }
 
-.fadeOutPopoutAnitaion {
-  animation: fadeout 0.6s;
+.popup_closed {
+  animation: fadeout 0.4s;
 }
 
 @keyframes fadeout {
