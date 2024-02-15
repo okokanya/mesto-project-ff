@@ -21,6 +21,6 @@ function createNewCard(e) {
   closeModal(document.querySelector('.popup_opened'));
 }
 
-export function addCard() {
+export function iniAddFormSubmitListener() {
   document.forms.newPlace.addEventListener('submit', createNewCard);
 }

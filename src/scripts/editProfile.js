@@ -20,4 +20,3 @@ export function handleSubmit(e) {
 export function initEditFormSubmitListener() {
   formElement.addEventListener('submit', handleSubmit);
 }
-

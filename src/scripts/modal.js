@@ -11,7 +11,7 @@ export function closeModal(element) {
 }
 
 export function closeWithEscape(e) {
-  let element = document.querySelector('.popup_opened');
+  const element = document.querySelector('.popup_opened');
   if (e.key === 'Escape') {
     closeModal(element);
   }
