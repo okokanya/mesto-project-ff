@@ -33,15 +33,21 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
 
 
 // const isValid = (formElement, inputElement) => {
-//   if (!inputElement.validity.valid) {
-//     // третьим аргументом мы передаём сообщение об ошибке,
-//     // которое получаем из validationMessage
-//     showInputError(formElement, inputElement, inputElement.validationMessage);
-//   } else {
-//     hideInputError(formElement, inputElement);
-//   }
-// }; 
+//   if (inputElement.validity.patternMismatch) {
+//       // данные атрибута доступны у элемента инпута через ключевое слово dataset.
+//       // обратите внимание, что в js имя атрибута пишется в camelCase (да-да, в
+//       // HTML мы писали в kebab-case, это не опечатка)
+//   inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+// } else {
+//   inputElement.setCustomValidity("");
+// }
 
+// if (!inputElement.validity.valid) {
+//   showInputError(formElement, inputElement, inputElement.validationMessage);
+// } else {
+//   hideInputError(formElement, inputElement);
+// }
+// }; 
 
 const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
   if (inputElement.validity.patternMismatch) {
@@ -85,28 +91,21 @@ export function setEventListeners ( formElement, inputSelector, submitButtonSele
 // };
 
 export function enableValidation ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) {
-
   const formArray = Array.from(document.querySelectorAll(formSelector));
   console.log(formArray);
-
   formArray.forEach((formItem) => {
     setEventListeners(
       formItem, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);
   });
 };
 
-
-// export const clearValidation = (form, validationConfig) => {
-//   const inputList = form.querySelectorAll(validationConfig.inputSelector);
-//   const button = form.querySelector(validationConfig.submitButtonSelector);
-//   inputList.forEach((input) => {
-//     hideInputError(
-//       form,
-//       input,
-//       validationConfig.inputErrorClass,
-//       validationConfig.errorClass
-//     );
-//   });
-//   button.disabled = true;
-//   button.classList.add(validationConfig.inactiveButtonClass);
-// };
+export const clearValidation = (form, validationConfig) => {
+  const inputList = form.querySelectorAll(validationConfig.inputSelector);
+  const button = form.querySelector(validationConfig.submitButtonSelector);
+  inputList.forEach((input) => {
+    hideInputError(form, input, validationConfig.inputErrorClass, validationConfig.errorClass
+    );
+  });
+  button.disabled = true;
+  button.classList.add(validationConfig.inactiveButtonClass);
+};
