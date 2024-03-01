@@ -6,6 +6,7 @@ import { iniAddFormSubmitListener } from './scripts/addCard.js';
 import { createCard, removeCard, toggleLike } from './scripts/card.js';
 import { initialCards } from './scripts/data.js';
 import { initEditFormSubmitListener } from './scripts/editProfile.js';
+import { enableValidation } from './scripts/validation.js';
 
 // @todo: Вывести карточки на страницу
 const placesList = document.querySelector('.places__list');
@@ -50,3 +51,17 @@ function clickHandler(evt) {
 }
 
 document.addEventListener('click', clickHandler);
+
+
+// объект для валидации
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button-no-active",
+  inputErrorClass: "popup__input-error",
+  errorClass: "popup__text-error-active",
+};
+
+// запустим валидацию
+enableValidation(validationConfig); 

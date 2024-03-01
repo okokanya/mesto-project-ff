@@ -29,3 +29,18 @@
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+.popup__text-error-active {
+  color: red;
+  font-size: 12px;
+}
+
+.popup__input-error {
+  border-bottom: 1px solid red;
+}
+
+.popup__button-no-active {
+  background-color: white;
+  color: #bfbfbf;
+  border: 1px solid #bfbfbf;
+}
