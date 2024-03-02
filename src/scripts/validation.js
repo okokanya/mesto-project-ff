@@ -1,14 +1,14 @@
 function showInputError (formItem, inputElement, errorMessage, inputErrorClass, errorClass) {
-  console.log(inputElement);
+  // console.log(inputElement);
   const errorElement = formItem.querySelector(`.${inputElement.id}-error`);
-  console.log(errorElement);
+  // console.log(errorElement);
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 
 function hideInputError (formItem, inputElement, inputErrorClass, errorClass) {
-  console.log('hideInputError');
+  // console.log('hideInputError');
   const errorElement = formItem.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
@@ -70,7 +70,6 @@ const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
 };
 
 export function setEventListeners ( formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass ) {
-  console.log('set');
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   inputList.forEach((inputElement) => {
@@ -92,7 +91,7 @@ export function setEventListeners ( formElement, inputSelector, submitButtonSele
 
 export function enableValidation ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) {
   const formArray = Array.from(document.querySelectorAll(formSelector));
-  console.log(formArray);
+  // console.log(formArray);
   formArray.forEach((formItem) => {
     setEventListeners(
       formItem, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);

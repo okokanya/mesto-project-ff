@@ -7,6 +7,7 @@ import { createCard, removeCard, toggleLike } from './scripts/card.js';
 import { initialCards } from './scripts/data.js';
 import { initEditFormSubmitListener } from './scripts/editProfile.js';
 import { enableValidation } from './scripts/validation.js';
+import { getUserData, getCardsData } from './scripts/api.js'
 
 // @todo: Вывести карточки на страницу
 const placesList = document.querySelector('.places__list');
@@ -65,3 +66,4 @@ const validationConfig = {
 
 // запустим валидацию
 enableValidation(validationConfig); 
+
