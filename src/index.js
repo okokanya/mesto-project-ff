@@ -4,16 +4,16 @@ import './styles.css';
 import { openModal, closeModal } from './scripts/modal.js';
 import { iniAddFormSubmitListener } from './scripts/addCard.js';
 import { createCard, removeCard, toggleLike } from './scripts/card.js';
-import { initialCards } from './scripts/data.js';
+// import { initialCards } from './scripts/data.js';
 import { initEditFormSubmitListener } from './scripts/editProfile.js';
 import { enableValidation } from './scripts/validation.js';
 import { getUserData, getCardsData } from './scripts/api.js'
 
-// @todo: Вывести карточки на страницу
-const placesList = document.querySelector('.places__list');
-initialCards.forEach(function (element) {
-  placesList.append(createCard(element, removeCard, toggleLike, onCardClick));
-})
+// // @todo: Вывести карточки на страницу
+// const placesList = document.querySelector('.places__list');
+// initialCards.forEach(function (element) {
+//   placesList.append(createCard(element, removeCard, toggleLike, onCardClick));
+// })
 
 initEditFormSubmitListener();
 iniAddFormSubmitListener()

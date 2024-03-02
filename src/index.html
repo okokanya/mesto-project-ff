@@ -39,32 +39,21 @@
     <h3 class="popup__title">Редактировать профиль</h3>
     <form class="popup__form" name="editProfile">
       <input id="input_type_name" type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required required minlength="2" maxlength="40" pattern="^[A-Za-z0-9а-яёА-ЯЁ\s\-\.]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" >
-			<!-- спан с ошибкой имя -->
 			<span class="popup__text-error input_type_name-error"></span>
-
       <input id="input_type_description" type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" required minlength="2" maxlength="200" pattern="^[A-Za-z0-9а-яёА-ЯЁ\s\-\.]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" >
-			<!-- спан с ошибкой дескришпен -->
 			<span class="popup__text-error input_type_description-error"></span>
       <button type="submit" class="button popup__button">Сохранить</button>
     </form>
   </div>
 </div>
-
-
-
 <div class="popup popup_type_new-card">
   <div class="popup__content">
     <button type="button" class="popup__close" aria-label="Закрыть поп-ап"></button>
     <h3 class="popup__title">Новое место</h3>
     <form class="popup__form" name="newPlace">
-
       <input id="input_type_card-name" type="text" name="placeName" required class="popup__input popup__input_type_card-name" placeholder="Название" required pattern="^[A-Za-z0-9а-яёА-ЯЁ\s\-\.]+$" minlength="2" maxlength="30" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
-			<!-- спан с ошибкой название места -->
-			<span class="popup__text-error input_type_card-name-error"></span>
-			
-			
+			<span class="popup__text-error input_type_card-name-error"></span>			
 			<input id="input_type_url" type="url" name="imageSrc" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required>
-			<!-- спан с ошибкой ссылка на картинку Новое место-->
 			<span class="popup__text-error input_type_url-error"></span>
       <button type="submit" class="button popup__button">Сохранить</button>
     </form>
@@ -86,6 +75,7 @@
   <div class="card__description">
     <h2 class="card__title">
     </h2>
+    <span class="card__likes"></span>
     <button type="button" class="card__like-button" aria-label="Поставить лайк карточке"></button>
   </div>
 </li>
