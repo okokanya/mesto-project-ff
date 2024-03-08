@@ -12,7 +12,7 @@ export function createCard(dataCard, addLike, deleteCard, onCardClick, userId) {
   const cardLikes = cardElement.querySelector(".card__likes");
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const likeButton = cardElement.querySelector(".card__like-button");
-  console.warn(dataCard);
+  // console.warn(dataCard);
   // console.warn( dataCard._id);
   // if (userDataId !== userDataId._id) {
   //   deleteButton.remove();

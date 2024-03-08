@@ -28,7 +28,7 @@ export const getInitialCards = () => {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .catch((err) => {
-      console.log(err); // выводим ошибку в консоль
+      console.error(err); // выводим ошибку в консоль
     }); 
   };
 
@@ -69,7 +69,7 @@ function setProfileAndCards() {
       inputTypeDescriprion.value = profileDescription.textContent;
 
       profileImage.setAttribute("style", `background-image:url(${userDataAvatar})`);
-      console.log(cardsData);
+      // console.log(cardsData);
       cardsData.forEach((card) => {
         // console.log(card);
         placesList.append(createCard(card, userDataId));

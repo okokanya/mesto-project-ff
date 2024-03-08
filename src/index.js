@@ -9,10 +9,10 @@ import { initEditFormSubmitListener } from './scripts/editProfile.js';
 import { enableValidation } from './scripts/validation.js';
 import { postNewCard, getUserData, getInitialCards } from './scripts/api.js'
 const formAddCard = document.forms.newPlace;
-console.log(formAddCard);
+// console.log(formAddCard);
 const buttonSubmitAddCard = formAddCard.querySelector(".popup__button");
 
-
+console.log('привет! у меня кроме валидации тут особо ничего не закончено, я скину работу на проверку просто чтобы начать уже что-то после нее делать, потому что тут я капитально застряла. хочу пару дней сделать перерыв и потом к ней вернуться :)')
 // // @todo: Вывести карточки на страницу
 const placesList = document.querySelector('.places__list');
 // initialCards.forEach(function (element) {
@@ -63,7 +63,7 @@ function handleFormSubmitAddCard(evt) {
   evt.preventDefault();
   buttonSubmitAddCard.textContent = 'Сохранение...';
   const placeName = formAddCard.elements.placeName;
-  console.log(placeName.value);
+  // console.log(placeName.value);
   const dataCard = {
     name: formAddCard["placeName"].value,
     link: formAddCard["imageSrc"].value,
