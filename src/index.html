@@ -51,9 +51,9 @@
     <button type="button" class="popup__close" aria-label="Закрыть поп-ап"></button>
     <h3 class="popup__title">Новое место</h3>
     <form class="popup__form" name="newPlace">
-      <input id="input_type_card-name" type="text" name="placeName" required class="popup__input popup__input_type_card-name" placeholder="Название" required pattern="^[A-Za-z0-9а-яёА-ЯЁ\s\-\.]+$" minlength="2" maxlength="30" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+      <input id="input_type_card-name" type="text" name="placeName" required class="popup__input popup__input_type_card-name" placeholder="Название" required pattern="^[A-Za-z0-9а-яёА-ЯЁ\s\-\.]+$" minlength="2" maxlength="30" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" value="hello">
 			<span class="popup__text-error input_type_card-name-error"></span>			
-			<input id="input_type_url" type="url" name="imageSrc" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required>
+			<input id="input_type_url" type="url" name="imageSrc" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required value="https://prorisuem.ru/foto/9208/risunki_kitti_22.webp">
 			<span class="popup__text-error input_type_url-error"></span>
       <button type="submit" class="button popup__button">Сохранить</button>
     </form>

@@ -1,14 +1,14 @@
 function showInputError (formItem, inputElement, errorMessage, inputErrorClass, errorClass) {
   // console.log(inputElement);
   const errorElement = formItem.querySelector(`.${inputElement.id}-error`);
-  // console.log(errorElement);
+  // console.warn(errorElement);
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 
 function hideInputError (formItem, inputElement, inputErrorClass, errorClass) {
-  // console.log('hideInputError');
+  // console.warn('hideInputError');
   const errorElement = formItem.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
@@ -30,25 +30,6 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
     buttonElement.classList.remove(inactiveButtonClass);
   }
 };
-
-
-// const isValid = (formElement, inputElement) => {
-//   if (inputElement.validity.patternMismatch) {
-//       // данные атрибута доступны у элемента инпута через ключевое слово dataset.
-//       // обратите внимание, что в js имя атрибута пишется в camelCase (да-да, в
-//       // HTML мы писали в kebab-case, это не опечатка)
-//   inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-// } else {
-//   inputElement.setCustomValidity("");
-// }
-
-// if (!inputElement.validity.valid) {
-//   showInputError(formElement, inputElement, inputElement.validationMessage);
-// } else {
-//   hideInputError(formElement, inputElement);
-// }
-// }; 
-
 const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);

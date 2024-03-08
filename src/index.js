@@ -7,14 +7,19 @@ import { createCard, removeCard, toggleLike } from './scripts/card.js';
 // import { initialCards } from './scripts/data.js';
 import { initEditFormSubmitListener } from './scripts/editProfile.js';
 import { enableValidation } from './scripts/validation.js';
-import { getUserData, getCardsData } from './scripts/api.js'
+import { postNewCard, getUserData, getInitialCards } from './scripts/api.js'
+const formAddCard = document.forms.newPlace;
+console.log(formAddCard);
+const buttonSubmitAddCard = formAddCard.querySelector(".popup__button");
+
 
 // // @todo: Вывести карточки на страницу
-// const placesList = document.querySelector('.places__list');
+const placesList = document.querySelector('.places__list');
 // initialCards.forEach(function (element) {
 //   placesList.append(createCard(element, removeCard, toggleLike, onCardClick));
 // })
-
+// const getUserInfoBasic () {
+// }
 initEditFormSubmitListener();
 iniAddFormSubmitListener()
 
@@ -52,6 +57,41 @@ function clickHandler(evt) {
 }
 
 document.addEventListener('click', clickHandler);
+
+
+function handleFormSubmitAddCard(evt) {
+  evt.preventDefault();
+  buttonSubmitAddCard.textContent = 'Сохранение...';
+  const placeName = formAddCard.elements.placeName;
+  console.log(placeName.value);
+  const dataCard = {
+    name: formAddCard["placeName"].value,
+    link: formAddCard["imageSrc"].value,
+    likes: [],
+    // owner: { _id: userId}
+  };
+
+  // dataCard.owner = { _id: userId };
+  // console.log('dataCard - ' + dataCard);
+  // dataCard.owner = { _id: userId };
+
+  postNewCard(dataCard)
+    .then((res) => {
+      placesList.prepend(
+        createCard(res, handelAddLike, deleteCard, onCardClick, userId)
+      );
+      closePopup(popupAddNewCard);
+      formAddCard.reset();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      buttonSubmitAddCard.textContent = "Сохранить";
+    });
+}
+
+formAddCard.addEventListener("submit", handleFormSubmitAddCard);
 
 
 // объект для валидации
