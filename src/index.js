@@ -12,7 +12,6 @@ const formAddCard = document.forms.newPlace;
 // console.log(formAddCard);
 const buttonSubmitAddCard = formAddCard.querySelector(".popup__button");
 
-console.log('привет! у меня кроме валидации тут особо ничего не закончено, я скину работу на проверку просто чтобы начать уже что-то после нее делать, потому что тут я капитально застряла. хочу пару дней сделать перерыв и потом к ней вернуться :)')
 // // @todo: Вывести карточки на страницу
 const placesList = document.querySelector('.places__list');
 // initialCards.forEach(function (element) {
