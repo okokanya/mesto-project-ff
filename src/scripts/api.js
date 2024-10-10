@@ -4,6 +4,9 @@ const placesList = document.querySelector('.places__list');
 const formElementEditProfile = document.forms["editProfile"];
 const submitEditProfileButton = formElementEditProfile.querySelector(".button");
 
+// Токен: db2f39af-180e-4eb9-8615-3688481eaf22
+// Идентификатор группы: cohort-magistr-2
+// GET https://nomoreparties.co/v1/cohortId/users/me 
 
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/cohort-magistr-2',
@@ -12,6 +15,30 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
+const onResponce = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+};
+
+export const getUserProfile = () => {
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: {
+      authorization: config.headers.authorization,
+    },
+  }).then((res)=>onResponce(res));
+};
+
+export const getCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: {
+      authorization: config.headers.authorization,
+      "Content-Type": "application/json",
+    },
+  }).then((res)=>onResponce(res));
+};
+
 
 export const getInitialCards = () => {
     return fetch(config.baseUrl + `/cards`, {
@@ -19,7 +46,6 @@ export const getInitialCards = () => {
         authorization: config.headers.authorization
       }
     })
-
     .then(res => {
       if (res.ok) {
         return res.json();
@@ -31,12 +57,6 @@ export const getInitialCards = () => {
       console.error(err); // выводим ошибку в консоль
     }); 
   };
-
-
-
-// Токен: db2f39af-180e-4eb9-8615-3688481eaf22
-// Идентификатор группы: cohort-magistr-2
-// GET https://nomoreparties.co/v1/cohortId/users/me 
 
 export const getUserData = () => {
   return fetch(config.baseUrl + `/users/me`, {
@@ -56,32 +76,16 @@ const profileImage = document.querySelector(".profile__image");
 const inputTypeName = document.querySelector(".popup__input_type_name");
 const inputTypeDescriprion = document.querySelector('.popup__input_type_description');
 
-function setProfileAndCards() {
-  Promise.all([getUserData(), getInitialCards()])
-    .then(([userData, cardsData]) => {
-      const userDataId = userData._id;
-      const userDataName = userData.name;
-      const userDataAbout = userData.about;
-      const userDataAvatar = userData.avatar;
-      profileTitle.textContent = userDataName;
-      inputTypeName.value = profileTitle.textContent;
-      profileDescription.textContent = userDataAbout;
-      inputTypeDescriprion.value = profileDescription.textContent;
-
-      profileImage.setAttribute("style", `background-image:url(${userDataAvatar})`);
-      // console.log(cardsData);
-      cardsData.forEach((card) => {
-        // console.log(card);
-        placesList.append(createCard(card, userDataId));
-      });
-    })
-    .catch((err) => {
-      console.warn(err);
-    })
-    .finally(() => {});
-}
-
-setProfileAndCards();
+export const apiAddLike = (cardId) => {
+  return fetch(`${baseUrl}cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: {
+      authorization: authToken,
+        "Content-Type": "application/json",
+    },
+  })
+  .then((res)=>onResponce(res))
+};
 
 
 export const postNewCard = (dataCard) => {
