@@ -1,4 +1,3 @@
-import { createCard, removeCard, toggleLike } from './card';
 import { closeModal } from './modal';
 
 function getNewData () { 

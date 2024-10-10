@@ -1,5 +1,4 @@
 
-import { createCard } from './card';
 const placesList = document.querySelector('.places__list');
 const formElementEditProfile = document.forms["editProfile"];
 const submitEditProfileButton = formElementEditProfile.querySelector(".button");
@@ -15,6 +14,7 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
+
 const onResponce = (res) => {
   if (res.ok) {
     return res.json();
@@ -39,68 +39,74 @@ export const getCards = () => {
   }).then((res)=>onResponce(res));
 };
 
-
-export const getInitialCards = () => {
-    return fetch(config.baseUrl + `/cards`, {
-      headers: {
-        authorization: config.headers.authorization
-      }
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.error(err); // выводим ошибку в консоль
-    }); 
-  };
-
-export const getUserData = () => {
-  return fetch(config.baseUrl + `/users/me`, {
+export const updateProfile = (profileName, profileAbout) => {
+  return fetch(`${baseUrl}users/me`, {
+    method: "PATCH",
     headers: {
-      authorization: config.headers.authorization
-    }
+      authorization: config.headers.authorization,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: profileName,
+      about: profileAbout,
+    }),
   })
-    .then(res => res.json())
-    .then((result) => {
-      return result;
-    }); 
+    .then((res)=>onResponce(res))
 };
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const profileImage = document.querySelector(".profile__image");
-const inputTypeName = document.querySelector(".popup__input_type_name");
-const inputTypeDescriprion = document.querySelector('.popup__input_type_description');
 
 export const apiAddLike = (cardId) => {
-  return fetch(`${baseUrl}cards/likes/${cardId}`, {
-    method: "PUT",
+  console.log(cardId);
+  // return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+  //   method: "PUT",
+  //   headers: {
+  //     authorization: config.headers.authorization,
+  //       "Content-Type": "application/json",
+  //   },
+  // })
+  // .then((res)=>onResponce(res))
+};
+
+export const apiDeleteLike = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "DELETE",
     headers: {
-      authorization: authToken,
+      authorization: config.headers.authorization,
         "Content-Type": "application/json",
     },
   })
   .then((res)=>onResponce(res))
 };
 
-
-export const postNewCard = (dataCard) => {
-  console.log('dataCard');
-  return fetch(config.baseUrl + `/cards`, {
+export const postCard = (dataCard)=>{
+  return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
-    headers: config.headers,
+    headers: {
+      authorization: config.headers.authorization,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       name: dataCard.name,
       link: dataCard.link,
     }),
   })
-  .then((res) => {
-    return res;
+    .then((res)=>onResponce(res))
+}
+
+export const deleteCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: "DELETE",
+    headers: {
+      authorization: config.headers.authorization,
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      _id: cardId,
+    }),
   })
+  .then((res)=>onResponce(res))
 };
 
 
@@ -132,7 +138,7 @@ function submitEditProfile(evt) {
       console.log('ok')
       profileTitle.textContent = formElementEditProfile.name.value;
       profileDescription.textContent = formElementEditProfile.description.value;
-      // closePopup(popupEditProfile);
+      closePopup(popupEditProfile);
     })
     .catch((err) => {
       console.log(err);
@@ -141,5 +147,18 @@ function submitEditProfile(evt) {
       submitEditProfileButton.textContent = "Сохранить";
     });
 }
+export const apiUpdateAvatar = (avatar) => {
+  return fetch(`${config.baseUrl}/users/me/avatar `, {
+    method: "PATCH",
+    headers: {
+      authorization: config.headers.authorization,
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      avatar: avatar,
+    }),
+  })
+  .then((res)=>onResponce(res))
 
+};
 formElementEditProfile.addEventListener("submit", submitEditProfile);
