@@ -59,14 +59,14 @@ const profileDescription = document.querySelector(".profile__description");
 
 export const apiAddLike = (cardId) => {
   console.log(cardId);
-  // return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-  //   method: "PUT",
-  //   headers: {
-  //     authorization: config.headers.authorization,
-  //       "Content-Type": "application/json",
-  //   },
-  // })
-  // .then((res)=>onResponce(res))
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: {
+      authorization: config.headers.authorization,
+        "Content-Type": "application/json",
+    },
+  })
+  .then((res)=>onResponce(res))
 };
 
 export const apiDeleteLike = (cardId) => {

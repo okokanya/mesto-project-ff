@@ -3,7 +3,11 @@ import { addCard } from "./scripts/card.js";
 import { openModal, closeModal } from './scripts/modal.js';
 import { initEditFormSubmitListener } from './scripts/editProfile.js';
 import { enableValidation } from './scripts/validation.js';
-import { postCard, getCards, getUserProfile, deleteCard, apiAddLike  } from './scripts/api.js'
+import { postCard, getCards, getUserProfile, deleteCard, apiAddLike, apiDeleteLike  } from './scripts/api.js'
+
+const popupCard = document.querySelector(".popup_type_image");
+const popupImage = document.querySelector(".popup__image");
+const popupCaption = document.querySelector(".popup__caption");
 
 const formNewPlace = document.forms["newPlace"];
 const formAddCard = document.forms.newPlace;
@@ -15,8 +19,8 @@ const placesList = document.querySelector('.places__list');
 const userDescription = document.querySelector(".profile__description");
 const nameNewPlace = formNewPlace.elements["placeName"];
 const linkNewPlace = formNewPlace.elements["imageSrc"];
-const popupImage = document.querySelector(".popup__image");
-const popupCaption = document.querySelector(".popup__caption");
+
+
 let userId = "";
 let userAvatar = "";
 
@@ -93,7 +97,6 @@ document.addEventListener('click', clickHandler);
 
 function addLike(evt) {
   const card = evt.target.closest(".card");
-  console.log(card);
   const likebox = card.querySelector(".card__likes");
   if (evt.target.closest(".card__like-button_is-active")) {
     console.log("id:", card._id);
@@ -131,10 +134,10 @@ function addNewCard(evt) {
     likes: [],
   };
   dataCard.owner = { _id: userId };
-  
+
   postCard(dataCard)
     .then((res) => {
-      placesList.prepend(addCard(res, userId, removeCard, addLike,handleOpenCard));
+      placesList.prepend(addCard(res, userId, removeCard, addLike, handleOpenCard));
       formNewPlace.reset();
       closeModal(evt.target.closest(".popup"));
     })
@@ -158,7 +161,6 @@ function removeCard(evt) {
       console.log(err);
     });
 }
-
 
 // объект для валидации
 const validationConfig = {
