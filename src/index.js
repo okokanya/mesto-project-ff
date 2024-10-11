@@ -162,6 +162,7 @@ function removeCard(evt) {
     });
 }
 
+
 // объект для валидации
 const validationConfig = {
   formSelector: ".popup__form",

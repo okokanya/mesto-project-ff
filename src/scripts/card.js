@@ -1,7 +1,7 @@
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector('#card-template').content;
 
-export function addCard (card, userId, removeCard, addLike, handleOpenCard) {
+export function addCard(card,userId,removeCard,addLike,handleOpenCard) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__title').textContent = card.name;
   const cardImage = cardElement.querySelector('.card__image');
@@ -11,11 +11,9 @@ export function addCard (card, userId, removeCard, addLike, handleOpenCard) {
   cardImage.src = card.link;
   cardImage.alt = card.name;
   cardLikes.textContent = card.likes.length;
-  const likeButton = cardElement.querySelector('.card__like-button');
-
   const removeButton = cardElement.querySelector('.card__delete-button');
+  const likeButton = cardElement.querySelector('.card__like-button');
   removeButton.addEventListener('click', removeCard);
-  
   if (userId !== card.owner._id) {
       removeButton.remove();
   }
