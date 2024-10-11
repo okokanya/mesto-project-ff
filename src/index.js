@@ -95,34 +95,34 @@ function clickHandler(evt) {
 
 document.addEventListener('click', clickHandler);
 
-function addLike(evt) {
-  const card = evt.target.closest(".card");
-  const likebox = card.querySelector(".card__likes");
-  if (evt.target.closest(".card__like-button_is-active")) {
-    console.log("id:", card._id);
-    apiDeleteLike(card.id)
-      .then((res) => {
-        console.log("LIKE", res);
-        likebox.textContent = res.likes.length;
-        evt.target.classList.toggle("card__like-button_is-active");
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {});
-  } else {
-    apiAddLike(card.id)
-      .then((res) => {
-        console.log("LIKE", res);
-        likebox.textContent = res.likes.length;
-        evt.target.classList.toggle("card__like-button_is-active");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-}
+// function addLike(evt) {
+//   const card = evt.target.closest(".card");
+//   const likebox = card.querySelector(".card__likes");
+//   if (evt.target.closest(".card__like-button_is-active")) {
+//     console.log("id:", card._id);
+//     apiDeleteLike(card.id)
+//       .then((res) => {
+//         console.log("LIKE", res);
+//         likebox.textContent = res.likes.length;
+//         evt.target.classList.toggle("card__like-button_is-active");
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       })
+//       .finally(() => {});
+//   } else {
+//     apiAddLike(card.id)
+//       .then((res) => {
+//         console.log("LIKE", res);
+//         likebox.textContent = res.likes.length;
+//         evt.target.classList.toggle("card__like-button_is-active");
+//         console.log(res);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }
+// }
 
 
 function addNewCard(evt) {
@@ -133,7 +133,7 @@ function addNewCard(evt) {
     link: linkNewPlace.value,
     likes: [],
   };
-  dataCard.owner = { _id: userId };
+  dataCard.owner = { "_id": userId };
 
   postCard(dataCard)
     .then((res) => {
