@@ -1,7 +1,7 @@
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector('#card-template').content;
 
-export function addCard(card,userId,removeCard,addLike,handleOpenCard) {
+export function addCard(card, userId, removeCard, addLike, handleOpenCard) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__title').textContent = card.name;
   const cardImage = cardElement.querySelector('.card__image');
