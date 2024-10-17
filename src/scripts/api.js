@@ -158,6 +158,7 @@ export const apiUpdateAvatar = (avatar) => {
     }),
   })
   .then((res)=>onResponce(res))
-
 };
+
+
 formElementEditProfile.addEventListener("submit", submitEditProfile);

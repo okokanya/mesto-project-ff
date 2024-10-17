@@ -2,8 +2,7 @@ import './styles.css';
 import { addCard } from "./scripts/card.js";
 import { openModal, closeModal } from './scripts/modal.js';
 import { initEditFormSubmitListener } from './scripts/editProfile.js';
-import { enableValidation } from './scripts/validation.js';
-import { postCard, getCards, getUserProfile, deleteCard, apiAddLike, apiDeleteLike  } from './scripts/api.js'
+import { postCard, getCards, getUserProfile, deleteCard, apiAddLike, apiDeleteLike, apiUpdateAvatar  } from './scripts/api.js'
 
 const popupCard = document.querySelector(".popup_type_image");
 const popupImage = document.querySelector(".popup__image");
@@ -20,6 +19,10 @@ const userDescription = document.querySelector(".profile__description");
 const nameNewPlace = formNewPlace.elements["placeName"];
 const linkNewPlace = formNewPlace.elements["imageSrc"];
 
+const popupUpdateAvatar = document.querySelector(".popup_type_update-avatar");
+const formUpdateAvatar = document.forms["change-avatar"];
+const buttonSubmitUpdateAvatar = formUpdateAvatar.querySelector(".popup__button");
+import { enableValidation, clearValidation } from "./scripts/validation.js";
 
 let userId = "";
 let userAvatar = "";
@@ -52,6 +55,69 @@ function loadInitialData() {
     });
 }
 
+const formEditProfile = document.forms["editProfile"];
+const profileEditButton = document.querySelector(".profile__edit-button");
+const nameInput = formEditProfile.elements.name;
+const jobInput = formEditProfile.elements.description;
+const popupProfile = document.querySelector(".popup_type_edit");
+
+profileEditButton.addEventListener("click", function () {
+  nameInput.value = userName.textContent; 
+  jobInput.value = userDescription.textContent;
+  // clearValidation(formEditProfile, validationConfig);
+  openModal(popupProfile);
+});
+
+
+
+//avatar
+
+profileImage.addEventListener("click", () => {
+  // evt.preventDefault();
+  // console.log('00');
+  formUpdateAvatar.reset();
+  clearValidation(formUpdateAvatar, validationConfig);
+  openModal(popupUpdateAvatar);
+  formUpdateAvatar.addEventListener("submit", updateAvatar);
+});
+
+
+function updateAvatar(evt) {
+  evt.preventDefault();
+  // buttonSubmitUpdateAvatar.textContent = "Сохранение...";
+  apiUpdateAvatar(formUpdateAvatar.avatar.value)
+    .then((res) => {
+      profileImage.removeAttribute("style");
+      profileImage.setAttribute("style", `background-image:url(${res.avatar})`);
+      closeModal(popupUpdateAvatar);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      // buttonSubmitUpdateAvatar.textContent = "Сохранить";
+    });
+}
+
+
+
+function handleFormProfileSubmit(evt) {
+  evt.preventDefault();
+  buttonSubmitEditProfile.textContent = "Сохранение...";
+  updateProfile(nameInput.value, jobInput.value)
+    .then((res) => {
+      userName.textContent = nameInput.value;
+      userDescription.textContent = jobInput.value;
+      closeModal(popupProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      buttonSubmitEditProfile.textContent = "Сохранить";
+    });
+}
+
 export function handleOpenCard(card){
   openModal(popupCard);
   popupImage.src = card.link;
@@ -61,6 +127,7 @@ export function handleOpenCard(card){
 
 initEditFormSubmitListener();
 // iniAddFormSubmitListener()
+
 
 function onCardClick(evt) {
   openModal(document.querySelector('.popup_type_image')); 
@@ -163,6 +230,8 @@ function removeCard(evt) {
 }
 
 
+
+
 // объект для валидации
 const validationConfig = {
   formSelector: ".popup__form",
@@ -172,6 +241,8 @@ const validationConfig = {
   inputErrorClass: "popup__input-error",
   errorClass: "popup__text-error-active",
 };
+
+
 
 // запустим валидацию
 enableValidation(validationConfig); 
