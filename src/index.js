@@ -217,7 +217,6 @@ function addNewCard(evt) {
 }
 formAddCard.addEventListener("submit", addNewCard);
 
-
 function removeCard(evt) {
   evt.preventDefault();
   deleteCard(evt.target.closest(".card").id)
@@ -228,9 +227,6 @@ function removeCard(evt) {
       console.log(err);
     });
 }
-
-
-
 
 // объект для валидации
 const validationConfig = {
