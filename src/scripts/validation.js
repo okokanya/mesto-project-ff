@@ -8,7 +8,7 @@ function showInputError (formItem, inputElement, errorMessage, inputErrorClass, 
 };
 
 function hideInputError (formItem, inputElement, inputErrorClass, errorClass) {
-  // console.warn('hideInputError');
+  console.warn('hideInputError');
   const errorElement = formItem.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);

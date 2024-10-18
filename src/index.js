@@ -74,11 +74,11 @@ profileEditButton.addEventListener("click", function () {
 
 profileImage.addEventListener("click", () => {
   // evt.preventDefault();
-  // console.log('00');
-  formUpdateAvatar.reset();
-  clearValidation(formUpdateAvatar, validationConfig);
+  console.log('00');
+  // formUpdateAvatar.reset();
+  // clearValidation(formUpdateAvatar, validationConfig);
   openModal(popupUpdateAvatar);
-  formUpdateAvatar.addEventListener("submit", updateAvatar);
+  formUpdateAvatar.addEventListener("submit", apiUpdateAvatar);
 });
 
 
