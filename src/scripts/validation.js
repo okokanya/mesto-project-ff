@@ -72,7 +72,6 @@ export function setEventListeners ( formElement, inputSelector, submitButtonSele
 
 export function enableValidation ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) {
   const formArray = Array.from(document.querySelectorAll(formSelector));
-  // console.log(formArray);
   formArray.forEach((formItem) => {
     setEventListeners(
       formItem, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);

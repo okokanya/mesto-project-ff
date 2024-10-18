@@ -108,7 +108,6 @@ export const deleteCard = (cardId) => {
   .then((res)=>onResponce(res))
 };
 
-
 export const updateUserInfo = (profileName, profileAbout) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
@@ -146,7 +145,9 @@ function submitEditProfile(evt) {
       submitEditProfileButton.textContent = "Сохранить";
     });
 }
+
 export const apiUpdateAvatar = (avatar) => {
+  console.log('upf')
   return fetch(`${config.baseUrl}/users/me/avatar `, {
     method: "PATCH",
     headers: {
