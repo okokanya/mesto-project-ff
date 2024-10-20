@@ -2,9 +2,14 @@ import './styles.css';
 import { addCard } from "./scripts/card.js";
 import { openModal, closeModal } from './scripts/modal.js';
 import { initEditFormSubmitListener } from './scripts/editProfile.js';
-import { postCard, getCards, getUserProfile, deleteCard, apiAddLike, apiDeleteLike, apiUpdateAvatar  } from './scripts/api.js'
+import { postCard, getCards, getUserProfile, deleteCard, apiAddLike, apiDeleteLike, apiUpdateAvatar, updateUserInfo  } from './scripts/api.js'
 import { enableValidation, clearValidation } from "./scripts/validation.js";
 
+
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+const formElementEditProfile = document.forms["editProfile"];
+const submitEditProfileButton = formElementEditProfile.querySelector(".button");
 const popupCard = document.querySelector(".popup_type_image");
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
@@ -122,7 +127,6 @@ function clickHandler(evt) {
 }
 
 document.addEventListener('click', clickHandler);
-
 function addLike(evt) {
   const card = evt.target.closest(".card");
   const likebox = card.querySelector(".card__likes");
@@ -176,6 +180,11 @@ function addNewCard(evt) {
       buttonSubmitNewPlace.textContent = "Сохранить";
     });
 }
+
+//2)
+// сделаем кнопку неактивной при добавлении нового места
+buttonSubmitNewPlace.classList.add("popup__button-no-active");
+buttonSubmitNewPlace.disabled = "true";
 formAddCard.addEventListener("submit", addNewCard);
 
 function removeCard(evt) {
@@ -199,6 +208,28 @@ const validationConfig = {
   errorClass: "popup__text-error-active",
 };
 
+function submitEditProfile(evt) {
+  evt.preventDefault();
+  submitEditProfileButton.textContent = "Сохранение...";
+  updateUserInfo(
+    formElementEditProfile.name.value,
+    formElementEditProfile.description.value
+  )
+    .then(() => {
+      console.log('ok')
+      profileTitle.textContent = formElementEditProfile.name.value;
+      profileDescription.textContent = formElementEditProfile.description.value;
+      closePopup(popupEditProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      submitEditProfileButton.textContent = "Сохранить";
+    });
+}
+
+formElementEditProfile.addEventListener("submit", submitEditProfile);
 
 // запустим валидацию
 enableValidation(validationConfig); 

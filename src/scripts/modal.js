@@ -1,8 +1,15 @@
 export function openModal(element) {
   element.classList.add('popup_opened');
+//1)
+//очистим инпуты после успешного добавления карточки
+  const openedPopUp = document.querySelector('.popup_opened');
+  const allInputs = [...openedPopUp.querySelectorAll('input')];
+  for (let i = 0; i < allInputs.length; i++) {
+    console.log(allInputs[i].value)
+    allInputs[i].value = '';
+  }
   document.addEventListener('keydown', closeWithEscape);
 }
-
 export function closeModal(element) {
   element.classList.add('popup_closed');
   setTimeout(() => element.classList.remove('popup_opened'),300);
@@ -11,8 +18,10 @@ export function closeModal(element) {
 }
 
 export function closeWithEscape(e) {
-  const element = document.querySelector('.popup_opened');
   if (e.key === 'Escape') {
+
+    // открытый попап нужно находить только после нажатия на Escape внутри if-конструкции
+    const element = document.querySelector('.popup_opened');
     closeModal(element);
   }
 }

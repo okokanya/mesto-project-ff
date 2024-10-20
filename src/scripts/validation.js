@@ -1,7 +1,5 @@
 function showInputError (formItem, inputElement, errorMessage, inputErrorClass, errorClass) {
-  // console.log(inputElement);
   const errorElement = formItem.querySelector(`.${inputElement.id}-error`);
-  // console.warn(errorElement);
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
